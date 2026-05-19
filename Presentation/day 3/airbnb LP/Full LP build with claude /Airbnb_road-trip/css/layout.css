@@ -1,0 +1,316 @@
+/* ─── Global resets ───────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font: var(--text-body-md-font);
+  letter-spacing: var(--text-body-md-ls);
+  color: var(--color-body);
+  background: var(--color-canvas);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font: inherit;
+}
+
+/* ─── Page container ──────────────────────────────────────────────────────── */
+
+.page-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* ─── Section spacing ─────────────────────────────────────────────────────── */
+
+.page-section {
+  padding: var(--space-section) 0;
+}
+
+.page-section--flush-top {
+  padding-top: 0;
+}
+
+.section-heading {
+  font: var(--text-display-xl-font);
+  letter-spacing: var(--text-display-xl-ls);
+  color: var(--color-ink);
+  margin: 0 0 var(--space-lg);
+}
+
+.section-subheading {
+  font: var(--text-body-md-font);
+  letter-spacing: var(--text-body-md-ls);
+  color: var(--color-muted);
+  margin: 0 0 var(--space-xl);
+}
+
+/* ─── Card grids ──────────────────────────────────────────────────────────── */
+
+.card-grid {
+  display: grid;
+  gap: var(--space-xl) var(--space-base);
+}
+
+.card-grid--4col {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.card-grid--3col {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card-grid--2col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 744px) and (max-width: 1127px) {
+  .card-grid--4col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .card-grid--3col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 743px) {
+  .card-grid--4col,
+  .card-grid--3col,
+  .card-grid--2col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Hero ────────────────────────────────────────────────────────────────── */
+
+.hero {
+  position: relative;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-surface-strong);
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.06) 50%, rgba(0,0,0,0) 100%);
+  z-index: 1;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-xl);
+  padding: var(--space-xxl) var(--space-base);
+  width: 100%;
+  max-width: 960px;
+}
+
+.hero__heading {
+  font: var(--text-display-xl-font);
+  letter-spacing: var(--text-display-xl-ls);
+  color: var(--color-on-primary);
+  font-size: 42px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+.hero__sub {
+  font: var(--text-body-md-font);
+  letter-spacing: var(--text-body-md-ls);
+  color: rgba(255,255,255,0.9);
+  margin-top: calc(-1 * var(--space-base));
+}
+
+.hero__search {
+  width: 100%;
+  max-width: 860px;
+}
+
+@media (max-width: 743px) {
+  .hero {
+    min-height: 260px;
+  }
+  .hero__heading {
+    font-size: 28px;
+  }
+}
+
+/* ─── How It Works (KIT GAP) ─────────────────────────────────────────────── */
+
+.how-it-works__steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: step-counter;
+}
+
+.how-it-works__step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  counter-increment: step-counter;
+}
+
+.how-it-works__step-num {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--text-display-sm-font);
+  letter-spacing: var(--text-display-sm-ls);
+  color: var(--color-ink);
+}
+
+.how-it-works__step-title {
+  font: var(--text-title-md-font);
+  letter-spacing: var(--text-title-md-ls);
+  color: var(--color-ink);
+}
+
+.how-it-works__step-body {
+  font: var(--text-body-sm-font);
+  letter-spacing: var(--text-body-sm-ls);
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 743px) {
+  .how-it-works__steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── CTA band ────────────────────────────────────────────────────────────── */
+
+.cta-band .button-primary {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+.cta-band .button-primary:hover {
+  background: var(--color-surface-soft);
+}
+
+.cta-band {
+  background: var(--color-ink);
+  text-align: center;
+  padding: var(--space-xxl) var(--space-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-base);
+}
+
+.cta-band__heading {
+  font: var(--text-display-md-font);
+  letter-spacing: var(--text-display-md-ls);
+  color: var(--color-on-primary);
+}
+
+.cta-band__sub {
+  font: var(--text-body-sm-font);
+  letter-spacing: var(--text-body-sm-ls);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* ─── Find Stay page ──────────────────────────────────────────────────────── */
+
+.find-stay-header {
+  padding: var(--space-lg) 0;
+  border-bottom: 1px solid var(--color-hairline-soft);
+}
+
+.find-stay-results-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-base) 0;
+}
+
+.find-stay-results-bar__count {
+  font: var(--text-body-sm-font);
+  letter-spacing: var(--text-body-sm-ls);
+  color: var(--color-muted);
+}
+
+/* ─── Route Planner page ──────────────────────────────────────────────────── */
+
+.route-planner-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--space-xl);
+  align-items: flex-start;
+  padding: var(--space-section) 0;
+}
+
+.route-planner-layout__sticky {
+  position: sticky;
+  top: 100px;
+}
+
+.route-planner-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.route-planner-form__heading {
+  font: var(--text-display-md-font);
+  letter-spacing: var(--text-display-md-ls);
+  color: var(--color-ink);
+  padding-bottom: var(--space-base);
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+@media (max-width: 1127px) {
+  .route-planner-layout {
+    grid-template-columns: 1fr;
+  }
+  .route-planner-layout__sticky {
+    position: static;
+  }
+}
+
+/* ─── Search bar compact (Find Stay) ─────────────────────────────────────── */
+
+.find-stay-search {
+  padding: var(--space-base) 0;
+  display: flex;
+  justify-content: center;
+}

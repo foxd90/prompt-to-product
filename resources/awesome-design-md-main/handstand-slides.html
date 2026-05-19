@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master the Handstand</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black:   #121212;
+      --surface: #181818;
+      --lift:    #1f1f1f;
+      --green:   #1ed760;
+      --white:   #ffffff;
+      --silver:  #b3b3b3;
+      --border:  #4d4d4d;
+
+      /* Modular scale — ratio 1.333 (Perfect Fourth), base 18px */
+      --t-caption: 18px;
+      --t-body:    24px;
+      --t-card:    32px;
+      --t-title:   56px;
+      --t-display: 80px;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--black);
+      font-family: 'Circular Std', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── DECK / SLIDE SHELL ── */
+    .deck { position: relative; width: 100%; height: 100%; }
+
+    .slide {
+      position: absolute; inset: 0;
+      padding: 5%;                          /* safe-zone: 5% every side */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.45s cubic-bezier(.4,0,.2,1);
+      background: var(--black);
+    }
+    .slide.active { opacity: 1; pointer-events: all; }
+
+    /* ── LOGO (every slide, bottom-left, inside safe-zone) ── */
+    .logo {
+      position: absolute;
+      bottom: 5%; left: 5%;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .logo img { width: 20px; height: 20px; display: block; }
+    .logo-wordmark {
+      font-size: var(--t-caption);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--silver);
+      line-height: 1;
+    }
+
+    /* ── NAV DOTS (fixed, bottom-right) ── */
+    .nav {
+      position: fixed; bottom: 5%; right: 5%;
+      display: flex; gap: 8px; align-items: center;
+      z-index: 200;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: background .3s, transform .3s;
+    }
+    .dot.active { background: var(--green); transform: scale(1.3); }
+
+    /* ── ARROW BUTTONS ── */
+    .arrow {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--lift); border: 1px solid var(--border);
+      color: var(--white); font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 200;
+      opacity: 0; transition: opacity .3s, background .2s;
+    }
+    body:hover .arrow:not(.hidden) { opacity: 1; }
+    .arrow:hover { background: #272727; }
+    .arrow-prev { left: 24px; }
+    .arrow-next { right: 24px; }
+    .arrow.hidden { display: none; }
+
+    /* ── SLIDE 1 TWO-COLUMN LAYOUT ── */
+    .s1-row {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      gap: 48px;
+    }
+    .s1-text { flex: 0 0 52%; }
+    .s1-illo {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      height: 100%;
+    }
+    .s1-photo {
+      height: 78vh;
+      width: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      display: block;
+    }
+
+    /* ══════════════════════════════════════════════
+       SLIDE 1 — HERO
+    ══════════════════════════════════════════════ */
+    .s1-eyebrow {
+      font-size: var(--t-caption);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 24px;
+      line-height: 1;
+    }
+
+    .s1-headline {
+      font-size: var(--t-display);
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 32px;
+      max-width: 9ch;
+    }
+
+    .s1-rule {
+      width: 64px; height: 3px;
+      background: var(--green);
+      border-radius: 9999px;
+      margin-bottom: 32px;
+    }
+
+    .s1-sub {
+      font-size: var(--t-body);
+      font-weight: 400;
+      color: var(--silver);
+      line-height: 1.5;
+    }
+
+    /* ══════════════════════════════════════════════
+       SLIDE 2 — FOUNDATION
+    ══════════════════════════════════════════════ */
+    .s2-headline {
+      font-size: var(--t-title);
+      font-weight: 700;
+      line-height: 1.08;
+      color: var(--white);
+      margin-bottom: 64px;
+      max-width: 14ch;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 880px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 8px;
+      padding: 32px;
+      box-shadow: rgba(0,0,0,.3) 0 8px 8px;
+    }
+
+    .card-label {
+      display: inline-block;
+      font-size: var(--t-caption);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .card-title {
+      font-size: var(--t-card);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .card-body {
+      font-size: var(--t-caption);
+      font-weight: 400;
+      color: var(--silver);
+      line-height: 1.5;
+    }
+
+    /* ══════════════════════════════════════════════
+       SLIDE 3 — KICK-UP
+    ══════════════════════════════════════════════ */
+    .s3-headline {
+      font-size: var(--t-title);
+      font-weight: 700;
+      line-height: 1.08;
+      color: var(--white);
+      margin-bottom: 64px;
+      max-width: 16ch;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      max-width: 880px;
+    }
+
+    .step-num {
+      font-size: var(--t-display);
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 16px;
+      letter-spacing: -2px;
+    }
+
+    .step-title {
+      font-size: var(--t-body);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .step-divider {
+      width: 24px; height: 2px;
+      background: var(--green);
+      border-radius: 9999px;
+      margin-bottom: 12px;
+    }
+
+    .step-body {
+      font-size: var(--t-caption);
+      font-weight: 400;
+      color: var(--silver);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- ── SLIDE 1: HERO ── -->
+  <div class="slide active" id="slide-1">
+    <div class="s1-row">
+
+      <!-- TEXT -->
+      <div class="s1-text">
+        <p class="s1-eyebrow">Handstand Guide</p>
+        <h1 class="s1-headline">Master the Handstand</h1>
+        <div class="s1-rule"></div>
+        <p class="s1-sub">From zero to inverted</p>
+      </div>
+
+      <!-- PHOTO -->
+      <div class="s1-illo">
+        <img src="Gemini_Generated_Image_9cyvw69cyvw69cyv.png" alt="Woman doing a handstand on a cobblestone street" class="s1-photo">
+      </div>
+
+    </div><!-- /s1-row -->
+
+    <div class="logo">
+      <img src="https://cdn.simpleicons.org/spotify/1ed760" alt="">
+      <span class="logo-wordmark">Spotify</span>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 2: FOUNDATION ── -->
+  <div class="slide" id="slide-2">
+    <h2 class="s2-headline">Strengthen Before You Invert</h2>
+
+    <div class="cards">
+      <div class="card">
+        <span class="card-label">01</span>
+        <div class="card-title">Core</div>
+        <div class="card-body">Hollow body holds — 30 sec sets</div>
+      </div>
+      <div class="card">
+        <span class="card-label">02</span>
+        <div class="card-title">Wrists</div>
+        <div class="card-body">Circles + forward weight shifts</div>
+      </div>
+      <div class="card">
+        <span class="card-label">03</span>
+        <div class="card-title">Shoulders</div>
+        <div class="card-body">Pike push-ups & wall plank holds</div>
+      </div>
+    </div>
+
+    <div class="logo">
+      <img src="https://cdn.simpleicons.org/spotify/1ed760" alt="">
+      <span class="logo-wordmark">Spotify</span>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 3: KICK-UP ── -->
+  <div class="slide" id="slide-3">
+    <h2 class="s3-headline">3 Steps to Your First Handstand</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Plant</div>
+        <div class="step-divider"></div>
+        <div class="step-body">Hands shoulder-width, fingers spread wide</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Kick</div>
+        <div class="step-divider"></div>
+        <div class="step-body">Lead leg drives up, trail follows fast</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Stack</div>
+        <div class="step-divider"></div>
+        <div class="step-body">Hips over shoulders over wrists — lock in</div>
+      </div>
+    </div>
+
+    <div class="logo">
+      <img src="https://cdn.simpleicons.org/spotify/1ed760" alt="">
+      <span class="logo-wordmark">Spotify</span>
+    </div>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- Arrow controls -->
+<button class="arrow arrow-prev hidden" id="prev" aria-label="Previous slide" onclick="navigate(-1)">&#8592;</button>
+<button class="arrow arrow-next" id="next" aria-label="Next slide" onclick="navigate(1)">&#8594;</button>
+
+<!-- Dot nav -->
+<nav class="nav" aria-label="Slides">
+  <span class="dot active" role="button" tabindex="0" aria-label="Slide 1" onclick="goTo(0)"></span>
+  <span class="dot"        role="button" tabindex="0" aria-label="Slide 2" onclick="goTo(1)"></span>
+  <span class="dot"        role="button" tabindex="0" aria-label="Slide 3" onclick="goTo(2)"></span>
+</nav>
+
+<script>
+  let cur = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.dot');
+  const prev   = document.getElementById('prev');
+  const next   = document.getElementById('next');
+
+  function goTo(n) {
+    slides[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    cur = n;
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('active');
+    prev.classList.toggle('hidden', cur === 0);
+    next.classList.toggle('hidden', cur === slides.length - 1);
+  }
+
+  function navigate(dir) {
+    const n = cur + dir;
+    if (n >= 0 && n < slides.length) goTo(n);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   navigate(-1);
+  });
+</script>
+
+</body>
+</html>

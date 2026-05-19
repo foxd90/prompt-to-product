@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airbnb Road Trip</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+</head>
+<body data-page="home">
+
+  <!-- ── TOP NAV ─────────────────────────────────────────────────────────── -->
+  <header class="top-nav" role="banner">
+    <div class="top-nav__inner">
+
+      <!-- Left: Logo -->
+      <a href="#home" class="top-nav__logo" aria-label="Airbnb Road Trip home"
+         data-nav-link="home">
+        <img src="images/airbnb-logo.svg" alt="Airbnb" class="top-nav__logo-img">
+      </a>
+
+      <!-- Center: Product tabs (desktop) -->
+      <nav class="top-nav__pill-nav" aria-label="Main navigation">
+        <ul class="top-nav__pill-list" role="list">
+
+          <!-- Home tab -->
+          <li class="top-nav__pill-item">
+            <a href="#home" class="top-nav__pill-link nav-link--active"
+               data-nav-link="home" aria-current="page">
+              <span class="top-nav__pill-icon" aria-hidden="true">
+                <img src="assets/home.png" alt="" width="32" height="32">
+              </span>
+              Home
+            </a>
+          </li>
+
+          <!-- Find Stay tab (NEW) -->
+          <li class="top-nav__pill-item">
+            <a href="#find-stay" class="top-nav__pill-link"
+               data-nav-link="find-stay">
+              <span class="top-nav__pill-icon" aria-hidden="true">
+                <img src="assets/find%20a%20stay.png" alt="" width="32" height="32">
+              </span>
+              Find Stay
+            </a>
+          </li>
+
+          <!-- Route Planner tab (NEW) -->
+          <li class="top-nav__pill-item">
+            <a href="#route-planner" class="top-nav__pill-link"
+               data-nav-link="route-planner">
+              <span class="top-nav__pill-icon" aria-hidden="true">
+                <img src="assets/route%20planner.png" alt="" width="32" height="32">
+              </span>
+              Route Planner
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+
+      <!-- Right: Actions -->
+      <div class="top-nav__actions">
+        <a href="#route-planner" class="button-tertiary-text top-nav__become-host"
+           data-nav-link="route-planner">Become a Host</a>
+        <button class="top-nav__icon-btn" aria-label="Choose language and currency">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+            <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M8 1.5C8 1.5 5.5 4 5.5 8s2.5 6.5 2.5 6.5M8 1.5C8 1.5 10.5 4 10.5 8S8 14.5 8 14.5M1.5 8h13" stroke="currentColor" stroke-width="1.2"/>
+          </svg>
+        </button>
+        <button class="top-nav__menu-btn" aria-label="Open menu" aria-expanded="false">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+            <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+          <span class="top-nav__avatar" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <circle cx="9" cy="6.5" r="3" fill="white"/>
+              <path d="M2 16.5c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="white" stroke-width="1.2"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Search band — shown on home page, hidden on other pages via CSS -->
+    <div class="top-nav__search-band">
+      <div class="search-bar-pill" id="hero-search" role="search" aria-label="Search road trips">
+        <div class="search-bar-pill__segment" data-segment="from" tabindex="0">
+          <span class="search-bar-pill__label">From</span>
+          <input id="hs-from" class="search-bar-pill__input" type="text"
+                 placeholder="City or address" autocomplete="off" aria-label="From city">
+        </div>
+        <div class="search-bar-pill__divider" aria-hidden="true"></div>
+        <div class="search-bar-pill__segment" data-segment="to" tabindex="0">
+          <span class="search-bar-pill__label">To</span>
+          <input id="hs-to" class="search-bar-pill__input" type="text"
+                 placeholder="City or address" autocomplete="off" aria-label="To city">
+        </div>
+        <div class="search-bar-pill__divider" aria-hidden="true"></div>
+        <div class="search-bar-pill__segment" data-segment="when" tabindex="0">
+          <span class="search-bar-pill__label">When</span>
+          <input id="hs-when" class="search-bar-pill__input" type="text"
+                 placeholder="Add dates" autocomplete="off" aria-label="Travel date" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+        </div>
+        <div class="search-bar-pill__divider" aria-hidden="true"></div>
+        <div class="search-bar-pill__segment search-bar-pill__segment--seats" data-segment="seats" tabindex="0">
+          <span class="search-bar-pill__label">Seats</span>
+          <input id="hs-seats" class="search-bar-pill__input" type="number"
+                 placeholder="1" min="1" max="8" aria-label="Number of seats">
+        </div>
+        <div class="search-bar-pill__submit">
+          <button class="button-pill-rausch" id="hero-search-btn" aria-label="Search road trips">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="6.5" cy="6.5" r="5" stroke="white" stroke-width="1.5"/>
+              <path d="M10.5 10.5l3 3" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile subnav -->
+    <nav class="top-nav__mobile-subnav" aria-label="Mobile main navigation">
+      <ul class="top-nav__mobile-list" role="list">
+        <li><a href="#home"          class="top-nav__mobile-link nav-link--active" data-nav-link="home">Home</a></li>
+        <li><a href="#find-stay"     class="top-nav__mobile-link" data-nav-link="find-stay">Find Stay</a></li>
+        <li><a href="#route-planner" class="top-nav__mobile-link" data-nav-link="route-planner">Route Planner</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ════════════════════════════════════════════════════════════════════ -->
+    <!--  PAGE: HOME                                                         -->
+    <!-- ════════════════════════════════════════════════════════════════════ -->
+    <section id="page-home" data-page-id="home" aria-label="Home">
+
+
+      <!-- Featured Trips -->
+      <div class="page-section" style="padding-top: var(--space-xxl);">
+        <div class="page-container">
+          <div class="section-heading-row">
+            <h2 class="section-heading">
+              <a href="#find-stay" class="section-heading__link" data-nav-link="find-stay">
+                Featured road trips
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M9 3.5l5.5 5.5L9 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </h2>
+            <div class="card-row-nav">
+              <button class="card-row-nav__btn" aria-label="Previous trips" data-carousel-prev="featured">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="card-row-nav__btn" aria-label="Next trips" data-carousel-next="featured">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="card-row-scroll">
+          <div class="card-row-scroll__track" id="featured-track">
+
+            <!-- property-card 1 -->
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&q=80&auto=format&fit=crop" alt="Pacific Coast Highway scenic drive">
+                <div class="property-card__badge-wrap">
+                  <span class="guest-favorite-badge">Guest favorite</span>
+                </div>
+                <button class="property-card__heart" aria-label="Save Pacific Coast Highway to wishlist">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg>
+                </button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title">
+                  <span>SF to LA · Pacific Coast Hwy</span>
+                  <span class="property-card__rating">★ 4.98</span>
+                </div>
+                <p class="property-card__sub">Hosted by Marcus · Tesla Model Y</p>
+                <p class="property-card__sub">Jun 14–16</p>
+                <p class="property-card__price"><strong>$45</strong> / seat</p>
+              </div>
+            </article>
+
+            <!-- property-card 2 -->
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=500&q=80&auto=format&fit=crop" alt="Rocky Mountain drive to Aspen">
+                <button class="property-card__heart" aria-label="Save Rocky Mountain Drive to wishlist">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg>
+                </button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title">
+                  <span>Denver to Aspen</span>
+                  <span class="property-card__rating">★ 4.91</span>
+                </div>
+                <p class="property-card__sub">Hosted by Elena · Subaru Outback</p>
+                <p class="property-card__sub">Jun 21</p>
+                <p class="property-card__price"><strong>$28</strong> / seat</p>
+              </div>
+            </article>
+
+            <!-- property-card 3 -->
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80&auto=format&fit=crop" alt="Florida Keys beach drive">
+                <div class="property-card__badge-wrap">
+                  <span class="guest-favorite-badge">Guest favorite</span>
+                </div>
+                <button class="property-card__heart" aria-label="Save Miami Beach Route to wishlist">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg>
+                </button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title">
+                  <span>Miami to Key West</span>
+                  <span class="property-card__rating">★ 4.96</span>
+                </div>
+                <p class="property-card__sub">Hosted by Sofia · BMW 3 Series</p>
+                <p class="property-card__sub">Jun 28–29</p>
+                <p class="property-card__price"><strong>$35</strong> / seat</p>
+              </div>
+            </article>
+
+            <!-- property-card 4 -->
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=500&q=80&auto=format&fit=crop" alt="Pacific Northwest forest drive">
+                <button class="property-card__heart" aria-label="Save Pacific Northwest route to wishlist">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg>
+                </button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title">
+                  <span>Portland to Olympic NP</span>
+                  <span class="property-card__rating">★ 4.89</span>
+                </div>
+                <p class="property-card__sub">Hosted by Kenji · Prius</p>
+                <p class="property-card__sub">Jul 4–6</p>
+                <p class="property-card__price"><strong>$22</strong> / seat</p>
+              </div>
+            </article>
+
+            <!-- property-card 5 -->
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=500&q=80&auto=format&fit=crop" alt="Arizona desert drive to Sedona">
+                <button class="property-card__heart" aria-label="Save Desert Route to wishlist">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg>
+                </button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title">
+                  <span>Phoenix to Sedona</span>
+                  <span class="property-card__rating">★ 4.94</span>
+                </div>
+                <p class="property-card__sub">Hosted by Amara · Jeep Wrangler</p>
+                <p class="property-card__sub">Jul 12</p>
+                <p class="property-card__price"><strong>$18</strong> / seat</p>
+              </div>
+            </article>
+
+            <!-- property-card 6 -->
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=500&q=80&auto=format&fit=crop" alt="NYC to Boston city drive">
+                <button class="property-card__heart" aria-label="Save NYC to Boston to wishlist">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg>
+                </button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title">
+                  <span>NYC to Boston</span>
+                  <span class="property-card__rating">★ 4.87</span>
+                </div>
+                <p class="property-card__sub">Hosted by Priya · Tesla Model 3</p>
+                <p class="property-card__sub">Jul 19</p>
+                <p class="property-card__price"><strong>$30</strong> / seat</p>
+              </div>
+            </article>
+
+            <!-- property-card 7 -->
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=500&q=80&auto=format&fit=crop" alt="Nashville to Smoky Mountains drive">
+                <button class="property-card__heart" aria-label="Save Nashville to Smoky Mountains to wishlist">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg>
+                </button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title">
+                  <span>Nashville to Smoky Mtns</span>
+                  <span class="property-card__rating">★ 4.93</span>
+                </div>
+                <p class="property-card__sub">Hosted by James · Ford Explorer</p>
+                <p class="property-card__sub">Aug 2–3</p>
+                <p class="property-card__price"><strong>$25</strong> / seat</p>
+              </div>
+            </article>
+
+            <!-- property-card 8 -->
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=500&q=80&auto=format&fit=crop" alt="Maine coastal Route 1 drive">
+                <button class="property-card__heart" aria-label="Save Route 1 Maine to wishlist">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg>
+                </button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title">
+                  <span>Portland ME · Route 1 Coast</span>
+                  <span class="property-card__rating">★ 4.90</span>
+                </div>
+                <p class="property-card__sub">Hosted by Clara · Volvo XC40</p>
+                <p class="property-card__sub">Aug 9–10</p>
+                <p class="property-card__price"><strong>$20</strong> / seat</p>
+              </div>
+            </article>
+
+          </div><!-- /card-row-scroll__track -->
+          </div><!-- /card-row-scroll -->
+        </div>
+      </div>
+
+      <!-- Scenic Routes -->
+      <div class="page-section page-section--flush-top">
+        <div class="page-container">
+          <div class="section-heading-row">
+            <h2 class="section-heading">Scenic routes</h2>
+            <div class="card-row-nav">
+              <button class="card-row-nav__btn" aria-label="Previous" data-carousel-prev="scenic">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="card-row-nav__btn" aria-label="Next" data-carousel-next="scenic">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="card-row-scroll"><div class="card-row-scroll__track" id="scenic-track">
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=500&q=80&auto=format&fit=crop" alt="Big Sur coastline"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>Big Sur · PCH South</span><span class="property-card__rating">★ 4.99</span></div><p class="property-card__sub">Hosted by Lena · Porsche Cayenne</p><p class="property-card__price"><strong>$55</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=500&q=80&auto=format&fit=crop" alt="Blue Ridge Parkway"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>Blue Ridge Parkway</span><span class="property-card__rating">★ 4.95</span></div><p class="property-card__sub">Hosted by Marco · RAV4</p><p class="property-card__price"><strong>$32</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=500&q=80&auto=format&fit=crop" alt="Going-to-the-Sun Road"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>Glacier NP · Sun Road</span><span class="property-card__rating">★ 4.97</span></div><p class="property-card__sub">Hosted by Nina · 4Runner</p><p class="property-card__price"><strong>$40</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?w=500&q=80&auto=format&fit=crop" alt="Route 66"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>Route 66 · Chicago to LA</span><span class="property-card__rating">★ 4.88</span></div><p class="property-card__sub">Hosted by Dion · Mustang</p><p class="property-card__price"><strong>$48</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1533130061792-64b345e4a833?w=500&q=80&auto=format&fit=crop" alt="Hawaii Hana Highway"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>Road to Hana · Maui</span><span class="property-card__rating">★ 5.00</span></div><p class="property-card__sub">Hosted by Kai · Jeep</p><p class="property-card__price"><strong>$60</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=500&q=80&auto=format&fit=crop" alt="Cascade Loop"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>Cascade Loop · WA</span><span class="property-card__rating">★ 4.92</span></div><p class="property-card__sub">Hosted by Asha · Subaru</p><p class="property-card__price"><strong>$27</strong> / seat</p></div></article>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- Weekend Getaways -->
+      <div class="page-section page-section--flush-top">
+        <div class="page-container">
+          <div class="section-heading-row">
+            <h2 class="section-heading">Weekend getaways</h2>
+            <div class="card-row-nav">
+              <button class="card-row-nav__btn" aria-label="Previous" data-carousel-prev="weekend">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="card-row-nav__btn" aria-label="Next" data-carousel-next="weekend">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="card-row-scroll"><div class="card-row-scroll__track" id="weekend-track">
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=500&q=80&auto=format&fit=crop" alt="Lake Tahoe weekend"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>SF to Lake Tahoe</span><span class="property-card__rating">★ 4.93</span></div><p class="property-card__sub">Hosted by Greg · Tesla Y</p><p class="property-card__price"><strong>$38</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?w=500&q=80&auto=format&fit=crop" alt="Hamptons weekend"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>NYC to the Hamptons</span><span class="property-card__rating">★ 4.86</span></div><p class="property-card__sub">Hosted by Olivia · BMW X5</p><p class="property-card__price"><strong>$42</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1534430480872-3498386e7856?w=500&q=80&auto=format&fit=crop" alt="Napa Valley weekend"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>SF to Napa Valley</span><span class="property-card__rating">★ 4.91</span></div><p class="property-card__sub">Hosted by Chloe · Model S</p><p class="property-card__price"><strong>$33</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1521336575822-6da63fb45455?w=500&q=80&auto=format&fit=crop" alt="Catskills weekend"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>NYC to the Catskills</span><span class="property-card__rating">★ 4.89</span></div><p class="property-card__sub">Hosted by Tyler · Outback</p><p class="property-card__price"><strong>$26</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=500&q=80&auto=format&fit=crop" alt="Palm Springs weekend"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>LA to Palm Springs</span><span class="property-card__rating">★ 4.94</span></div><p class="property-card__sub">Hosted by Mia · Convertible</p><p class="property-card__price"><strong>$29</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=500&q=80&auto=format&fit=crop" alt="Asheville weekend"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>Charlotte to Asheville</span><span class="property-card__rating">★ 4.90</span></div><p class="property-card__sub">Hosted by Ben · Highlander</p><p class="property-card__price"><strong>$24</strong> / seat</p></div></article>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- Popular Picks -->
+      <div class="page-section page-section--flush-top">
+        <div class="page-container">
+          <div class="section-heading-row">
+            <h2 class="section-heading">Popular picks</h2>
+            <div class="card-row-nav">
+              <button class="card-row-nav__btn" aria-label="Previous" data-carousel-prev="popular">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="card-row-nav__btn" aria-label="Next" data-carousel-next="popular">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="card-row-scroll"><div class="card-row-scroll__track" id="popular-track">
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=500&q=80&auto=format&fit=crop" alt="NYC skyline"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>NYC to Philadelphia</span><span class="property-card__rating">★ 4.85</span></div><p class="property-card__sub">Hosted by Raj · Camry</p><p class="property-card__price"><strong>$18</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=500&q=80&auto=format&fit=crop" alt="Chicago drive"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>Chicago to Milwaukee</span><span class="property-card__rating">★ 4.82</span></div><p class="property-card__sub">Hosted by Sam · Civic</p><p class="property-card__price"><strong>$15</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=500&q=80&auto=format&fit=crop" alt="LA to Vegas"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>LA to Las Vegas</span><span class="property-card__rating">★ 4.87</span></div><p class="property-card__sub">Hosted by Zara · Tesla</p><p class="property-card__price"><strong>$35</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=500&q=80&auto=format&fit=crop" alt="Austin Texas"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>Dallas to Austin</span><span class="property-card__rating">★ 4.88</span></div><p class="property-card__sub">Hosted by Luis · F-150</p><p class="property-card__price"><strong>$22</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=500&q=80&auto=format&fit=crop" alt="Seattle drive"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>Seattle to Portland</span><span class="property-card__rating">★ 4.91</span></div><p class="property-card__sub">Hosted by Hana · Prius</p><p class="property-card__price"><strong>$20</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1501426026826-31c667bdf23d?w=500&q=80&auto=format&fit=crop" alt="Atlanta drive"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>Atlanta to Savannah</span><span class="property-card__rating">★ 4.84</span></div><p class="property-card__sub">Hosted by Nora · Accord</p><p class="property-card__price"><strong>$19</strong> / seat</p></div></article>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- Long Hauls -->
+      <div class="page-section page-section--flush-top">
+        <div class="page-container">
+          <div class="section-heading-row">
+            <h2 class="section-heading">Long hauls</h2>
+            <div class="card-row-nav">
+              <button class="card-row-nav__btn" aria-label="Previous" data-carousel-prev="longhaul">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="card-row-nav__btn" aria-label="Next" data-carousel-next="longhaul">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="card-row-scroll"><div class="card-row-scroll__track" id="longhaul-track">
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=500&q=80&auto=format&fit=crop" alt="Cross country drive"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>NYC to LA · 5 days</span><span class="property-card__rating">★ 4.96</span></div><p class="property-card__sub">Hosted by Victor · Expedition</p><p class="property-card__price"><strong>$120</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=500&q=80&auto=format&fit=crop" alt="South to North drive"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>Miami to New York · 3 days</span><span class="property-card__rating">★ 4.90</span></div><p class="property-card__sub">Hosted by Ana · Suburban</p><p class="property-card__price"><strong>$85</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?w=500&q=80&auto=format&fit=crop" alt="Northwest loop"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>NW National Parks Loop</span><span class="property-card__rating">★ 4.98</span></div><p class="property-card__sub">Hosted by Owen · Land Cruiser</p><p class="property-card__price"><strong>$95</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=500&q=80&auto=format&fit=crop" alt="Southwest road trip"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>Southwest Canyon Circuit</span><span class="property-card__rating">★ 4.93</span></div><p class="property-card__sub">Hosted by Finn · Bronco</p><p class="property-card__price"><strong>$78</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=500&q=80&auto=format&fit=crop" alt="Desert drive"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>Texas Hill Country Loop</span><span class="property-card__rating">★ 4.87</span></div><p class="property-card__sub">Hosted by Rosa · Tacoma</p><p class="property-card__price"><strong>$52</strong> / seat</p></div></article>
+            <article class="property-card"><div class="property-card__photo-wrap"><img class="property-card__photo" src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=500&q=80&auto=format&fit=crop" alt="Mountain drive"><button class="property-card__heart" aria-label="Save"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button></div><div class="property-card__meta"><div class="property-card__title"><span>Rockies Grand Loop · 4 days</span><span class="property-card__rating">★ 4.95</span></div><p class="property-card__sub">Hosted by Ida · 4Runner</p><p class="property-card__price"><strong>$110</strong> / seat</p></div></article>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- How It Works -->
+      <!-- KIT GAP: No step/timeline component exists in the Airbnb UI Kit. A 'step-process' kit component (numbered card with icon, title, body text) would replace this custom <ol>. Rendered as plain ordered list + custom CSS. -->
+      <div class="page-section" style="background: var(--color-surface-soft);">
+        <div class="page-container">
+          <div class="kit-gap" style="margin-bottom: var(--space-lg);">
+            <span class="kit-gap__label">KIT GAP</span>
+            <p class="kit-gap__description">No step/timeline component in the Airbnb UI Kit. A <code>step-process</code> kit component (numbered card with icon + title + body) would replace this custom layout.</p>
+          </div>
+          <h2 class="section-heading">How Road Trip works</h2>
+          <ol class="how-it-works__steps">
+            <li class="how-it-works__step">
+              <div class="how-it-works__step-num">1</div>
+              <h3 class="how-it-works__step-title">Post your route</h3>
+              <p class="how-it-works__step-body">Tell us where you're going, when you're leaving, and how many seats you have. Takes under 2 minutes.</p>
+            </li>
+            <li class="how-it-works__step">
+              <div class="how-it-works__step-num">2</div>
+              <h3 class="how-it-works__step-title">Find travelers</h3>
+              <p class="how-it-works__step-body">Guests heading the same way request to join. You approve who rides with you. All profiles are verified.</p>
+            </li>
+            <li class="how-it-works__step">
+              <div class="how-it-works__step-num">3</div>
+              <h3 class="how-it-works__step-title">Share the road</h3>
+              <p class="how-it-works__step-body">Split fuel costs, meet interesting people, and earn money doing a drive you were already taking.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Host showcase -->
+      <div class="page-section">
+        <div class="page-container">
+          <div class="section-heading-row">
+            <h2 class="section-heading">Meet your drivers</h2>
+          </div>
+          <div class="card-grid card-grid--2col">
+
+            <div class="host-card">
+              <div class="host-card__header">
+                <div class="host-card__avatar-placeholder" aria-hidden="true">M</div>
+                <div>
+                  <h3 class="host-card__name">Marcus Chen</h3>
+                  <div class="host-card__superhost">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+                    Superhost
+                  </div>
+                </div>
+              </div>
+              <div class="amenity-row">
+                <span class="amenity-row__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="1" y="7" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7V5.5A1.5 1.5 0 016.5 4h7A1.5 1.5 0 0115 5.5V7" stroke="currentColor" stroke-width="1.3"/><circle cx="4" cy="16" r="1.3" fill="currentColor"/><circle cx="12" cy="16" r="1.3" fill="currentColor"/></svg></span>
+                Routes: Pacific Coast, Bay Area loops
+              </div>
+              <div class="amenity-row">
+                <span class="amenity-row__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 6.5h6.1l-5 3.9 1.9 6.6L10 15l-5.4 4 1.9-6.6-5-3.9h6.1L10 2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span>
+                4.98 · 142 trips completed
+              </div>
+              <div class="amenity-row">
+                <span class="amenity-row__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 3a1 1 0 011-1h12a1 1 0 011 1v10a1 1 0 01-1 1H7l-4 4V3z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span>
+                "Marcus is incredibly considerate — great music taste too."
+              </div>
+              <button class="button-secondary" style="width: 100%;" aria-label="Contact Marcus">Contact Marcus</button>
+            </div>
+
+            <div class="host-card">
+              <div class="host-card__header">
+                <div class="host-card__avatar-placeholder" aria-hidden="true">E</div>
+                <div>
+                  <h3 class="host-card__name">Elena Vasquez</h3>
+                  <div class="host-card__superhost">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+                    Superhost
+                  </div>
+                </div>
+              </div>
+              <div class="amenity-row">
+                <span class="amenity-row__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="1" y="7" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7V5.5A1.5 1.5 0 016.5 4h7A1.5 1.5 0 0115 5.5V7" stroke="currentColor" stroke-width="1.3"/><circle cx="4" cy="16" r="1.3" fill="currentColor"/><circle cx="12" cy="16" r="1.3" fill="currentColor"/></svg></span>
+                Routes: Denver ↔ Aspen, I-70 corridor
+              </div>
+              <div class="amenity-row">
+                <span class="amenity-row__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 6.5h6.1l-5 3.9 1.9 6.6L10 15l-5.4 4 1.9-6.6-5-3.9h6.1L10 2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span>
+                4.91 · 89 trips completed
+              </div>
+              <div class="amenity-row">
+                <span class="amenity-row__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 3a1 1 0 011-1h12a1 1 0 011 1v10a1 1 0 01-1 1H7l-4 4V3z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span>
+                "Best mountain drive I've ever had. Elena knows every viewpoint."
+              </div>
+              <button class="button-secondary" style="width: 100%;" aria-label="Contact Elena">Contact Elena</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA band -->
+      <div class="cta-band">
+        <h2 class="cta-band__heading">Ready to hit the road?</h2>
+        <p class="cta-band__sub">Join thousands of drivers and travelers making connections one road trip at a time.</p>
+        <a href="#route-planner" class="button-primary" data-nav-link="route-planner">Start your road trip</a>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <div class="footer-light">
+          <div class="footer-light__grid">
+            <div>
+              <h4 class="footer-light__col-head">Support</h4>
+              <ul class="footer-light__links">
+                <li><a href="#" class="footer-link">Help Center</a></li>
+                <li><a href="#" class="footer-link">Safety information</a></li>
+                <li><a href="#" class="footer-link">Cancellation options</a></li>
+                <li><a href="#" class="footer-link">Our COVID-19 response</a></li>
+                <li><a href="#" class="footer-link">Report a concern</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="footer-light__col-head">Hosting</h4>
+              <ul class="footer-light__links">
+                <li><a href="#" class="footer-link">Try hosting</a></li>
+                <li><a href="#" class="footer-link">AirCover for Hosts</a></li>
+                <li><a href="#" class="footer-link">Explore hosting resources</a></li>
+                <li><a href="#" class="footer-link">Visit our community forum</a></li>
+                <li><a href="#" class="footer-link">How to host responsibly</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="footer-light__col-head">Road Trip</h4>
+              <ul class="footer-light__links">
+                <li><a href="#" class="footer-link">How it works</a></li>
+                <li><a href="#" class="footer-link">Driver guidelines</a></li>
+                <li><a href="#" class="footer-link">Insurance &amp; safety</a></li>
+                <li><a href="#" class="footer-link">Newsroom</a></li>
+                <li><a href="#" class="footer-link">Careers</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="legal-band">
+          <p class="legal-band__copy">© 2026 Airbnb, Inc. · Concept feature — Road Trip</p>
+          <div class="legal-band__links">
+            <a href="#" class="legal-band__link">Privacy</a>
+            <a href="#" class="legal-band__link">Terms</a>
+            <a href="#" class="legal-band__link">Sitemap</a>
+          </div>
+        </div>
+      </footer>
+
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════════ -->
+    <!--  PAGE: FIND STAY                                                    -->
+    <!-- ════════════════════════════════════════════════════════════════════ -->
+    <section id="page-find-stay" data-page-id="find-stay" aria-label="Find Stay" hidden aria-hidden="true">
+
+      <!-- Compact search bar -->
+      <div class="find-stay-header" style="background: var(--color-canvas);">
+        <div class="page-container find-stay-search">
+          <div class="search-bar-pill" role="search" aria-label="Filter road trips" style="max-width: 700px; width: 100%;">
+            <div class="search-bar-pill__segment" tabindex="0" role="button" aria-label="From where">
+              <span class="search-bar-pill__label">From</span>
+              <span class="search-bar-pill__value">Any city</span>
+            </div>
+            <div class="search-bar-pill__divider" aria-hidden="true"></div>
+            <div class="search-bar-pill__segment" tabindex="0" role="button" aria-label="To where">
+              <span class="search-bar-pill__label">To</span>
+              <span class="search-bar-pill__value">Any destination</span>
+            </div>
+            <div class="search-bar-pill__divider" aria-hidden="true"></div>
+            <div class="search-bar-pill__segment" tabindex="0" role="button" aria-label="When">
+              <span class="search-bar-pill__label">When</span>
+              <span class="search-bar-pill__value">Any week</span>
+            </div>
+            <div class="search-bar-pill__divider" aria-hidden="true"></div>
+            <div class="search-bar-pill__segment" tabindex="0" role="button" aria-label="Seats">
+              <span class="search-bar-pill__label">Seats</span>
+              <span class="search-bar-pill__value">1+</span>
+            </div>
+            <div class="search-bar-pill__submit">
+              <button class="button-pill-rausch" aria-label="Search">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <circle cx="6.5" cy="6.5" r="5" stroke="white" stroke-width="1.5"/>
+                  <path d="M10.5 10.5l3 3" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter strip -->
+      <div style="padding: var(--space-base) 0; border-bottom: 1px solid var(--color-hairline-soft);">
+        <div class="page-container">
+          <div class="category-strip" role="tablist" aria-label="Filter by route type" data-category-strip>
+            <button class="category-tab category-tab--active" role="tab" aria-selected="true" data-category-tab>All Routes</button>
+            <button class="category-tab" role="tab" aria-selected="false" data-category-tab>Scenic</button>
+            <button class="category-tab" role="tab" aria-selected="false" data-category-tab>City Hops</button>
+            <button class="category-tab" role="tab" aria-selected="false" data-category-tab>Beach</button>
+            <button class="category-tab" role="tab" aria-selected="false" data-category-tab>Mountain</button>
+            <button class="category-tab" role="tab" aria-selected="false" data-category-tab>Weekend</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results bar -->
+      <div class="page-container">
+        <div class="find-stay-results-bar">
+          <p class="find-stay-results-bar__count" aria-live="polite">240+ road trips available</p>
+          <button class="button-secondary" aria-pressed="false">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="margin-right: 6px;">
+              <rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/>
+              <circle cx="5.5" cy="8" r="1.5" fill="currentColor"/>
+              <path d="M7 8h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+            Show map
+          </button>
+        </div>
+      </div>
+
+      <!-- KIT GAP: Map view -->
+      <!-- KIT GAP: No map-view or split-panel component exists in the Airbnb UI Kit. A 'map-panel' kit component with embedded map (Mapbox/Google Maps) and a list/map toggle behavior is needed. The button above shows this placeholder panel. -->
+      <div class="page-container" style="margin-bottom: var(--space-base);">
+        <div class="kit-gap">
+          <span class="kit-gap__label">KIT GAP</span>
+          <p class="kit-gap__description">No map-view or split-panel component in the Airbnb UI Kit. A <code>map-panel</code> kit component with embedded Mapbox integration and list/map toggle is needed here.</p>
+        </div>
+      </div>
+
+      <!-- Listings grid -->
+      <div class="page-section page-section--flush-top">
+        <div class="page-container">
+          <div class="card-grid card-grid--3col">
+
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1471922694854-ff1b63b20054?w=500&q=80&auto=format&fit=crop" alt="SF to LA Pacific Coast Highway">
+                <div class="property-card__badge-wrap"><span class="guest-favorite-badge">Guest favorite</span></div>
+                <button class="property-card__heart" aria-label="Save to wishlist"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title"><span>SF to LA · Pacific Coast</span><span class="property-card__rating">★ 4.98</span></div>
+                <p class="property-card__sub">Marcus · Tesla Model Y · 3 seats left</p>
+                <p class="property-card__price"><strong>$45</strong> / seat</p>
+              </div>
+            </article>
+
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?w=500&q=80&auto=format&fit=crop" alt="Denver to Aspen mountain drive">
+                <button class="property-card__heart" aria-label="Save to wishlist"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title"><span>Denver to Aspen</span><span class="property-card__rating">★ 4.91</span></div>
+                <p class="property-card__sub">Elena · Subaru Outback · 2 seats left</p>
+                <p class="property-card__price"><strong>$28</strong> / seat</p>
+              </div>
+            </article>
+
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=500&q=80&auto=format&fit=crop" alt="Miami to Key West ocean drive">
+                <div class="property-card__badge-wrap"><span class="guest-favorite-badge">Guest favorite</span></div>
+                <button class="property-card__heart" aria-label="Save to wishlist"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title"><span>Miami to Key West</span><span class="property-card__rating">★ 4.96</span></div>
+                <p class="property-card__sub">Sofia · BMW 3 Series · 1 seat left</p>
+                <p class="property-card__price"><strong>$35</strong> / seat</p>
+              </div>
+            </article>
+
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=500&q=80&auto=format&fit=crop" alt="Portland to Olympic National Park forest">
+                <button class="property-card__heart" aria-label="Save to wishlist"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title"><span>Portland to Olympic NP</span><span class="property-card__rating">★ 4.89</span></div>
+                <p class="property-card__sub">Kenji · Prius · 4 seats left</p>
+                <p class="property-card__price"><strong>$22</strong> / seat</p>
+              </div>
+            </article>
+
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1542401886-65d6c61db217?w=500&q=80&auto=format&fit=crop" alt="Phoenix to Sedona red rock drive">
+                <button class="property-card__heart" aria-label="Save to wishlist"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title"><span>Phoenix to Sedona</span><span class="property-card__rating">★ 4.94</span></div>
+                <p class="property-card__sub">Amara · Jeep Wrangler · 3 seats left</p>
+                <p class="property-card__price"><strong>$18</strong> / seat</p>
+              </div>
+            </article>
+
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1522083165195-3424ed129620?w=500&q=80&auto=format&fit=crop" alt="NYC to Boston urban drive">
+                <div class="property-card__badge-wrap"><span class="guest-favorite-badge">Guest favorite</span></div>
+                <button class="property-card__heart" aria-label="Save to wishlist"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title"><span>NYC to Boston</span><span class="property-card__rating">★ 4.87</span></div>
+                <p class="property-card__sub">Priya · Tesla Model 3 · 2 seats left</p>
+                <p class="property-card__price"><strong>$30</strong> / seat</p>
+              </div>
+            </article>
+
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=500&q=80&auto=format&fit=crop" alt="Nashville to Smoky Mountains countryside">
+                <button class="property-card__heart" aria-label="Save to wishlist"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title"><span>Nashville to Smoky Mtns</span><span class="property-card__rating">★ 4.93</span></div>
+                <p class="property-card__sub">James · Ford Explorer · 3 seats left</p>
+                <p class="property-card__price"><strong>$25</strong> / seat</p>
+              </div>
+            </article>
+
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1504474298956-b8a7657e3e69?w=500&q=80&auto=format&fit=crop" alt="Maine Route 1 coastal drive">
+                <button class="property-card__heart" aria-label="Save to wishlist"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title"><span>Portland ME · Route 1</span><span class="property-card__rating">★ 4.90</span></div>
+                <p class="property-card__sub">Clara · Volvo XC40 · 2 seats left</p>
+                <p class="property-card__price"><strong>$20</strong> / seat</p>
+              </div>
+            </article>
+
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1533240332313-0db49b459ad6?w=500&q=80&auto=format&fit=crop" alt="Austin to Big Bend desert drive">
+                <button class="property-card__heart" aria-label="Save to wishlist"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title"><span>Austin to Big Bend NP</span><span class="property-card__rating">★ 4.85</span></div>
+                <p class="property-card__sub">Diego · RAM 1500 · 2 seats left</p>
+                <p class="property-card__price"><strong>$40</strong> / seat</p>
+              </div>
+            </article>
+
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=500&q=80&auto=format&fit=crop" alt="Chicago to Sleeping Bear Dunes lake drive">
+                <button class="property-card__heart" aria-label="Save to wishlist"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title"><span>Chicago to Sleeping Bear</span><span class="property-card__rating">★ 4.88</span></div>
+                <p class="property-card__sub">Nadia · Toyota RAV4 · 3 seats left</p>
+                <p class="property-card__price"><strong>$27</strong> / seat</p>
+              </div>
+            </article>
+
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1455156218388-5e61b526818b?w=500&q=80&auto=format&fit=crop" alt="Seattle to Vancouver Pacific Northwest drive">
+                <button class="property-card__heart" aria-label="Save to wishlist"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title"><span>Seattle to Vancouver BC</span><span class="property-card__rating">★ 4.92</span></div>
+                <p class="property-card__sub">Yuki · Honda CRV · 2 seats left</p>
+                <p class="property-card__price"><strong>$32</strong> / seat</p>
+              </div>
+            </article>
+
+            <article class="property-card">
+              <div class="property-card__photo-wrap">
+                <img class="property-card__photo" src="https://images.unsplash.com/photo-1473181488821-2d23949a045a?w=500&q=80&auto=format&fit=crop" alt="Salt Lake City to Moab Utah canyon drive">
+                <button class="property-card__heart" aria-label="Save to wishlist"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5S2.5 12.5 2.5 7.5A4 4 0 0110 5a4 4 0 017.5 2.5C17.5 12.5 10 17.5 10 17.5z" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.3)"/></svg></button>
+              </div>
+              <div class="property-card__meta">
+                <div class="property-card__title"><span>Salt Lake City to Moab</span><span class="property-card__rating">★ 4.97</span></div>
+                <p class="property-card__sub">Rafael · Ford Bronco · 1 seat left</p>
+                <p class="property-card__price"><strong>$38</strong> / seat</p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <div class="footer-light">
+          <div class="footer-light__grid">
+            <div>
+              <h4 class="footer-light__col-head">Support</h4>
+              <ul class="footer-light__links">
+                <li><a href="#" class="footer-link">Help Center</a></li>
+                <li><a href="#" class="footer-link">Safety information</a></li>
+                <li><a href="#" class="footer-link">Cancellation options</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="footer-light__col-head">Hosting</h4>
+              <ul class="footer-light__links">
+                <li><a href="#" class="footer-link">Try hosting</a></li>
+                <li><a href="#" class="footer-link">AirCover for Hosts</a></li>
+                <li><a href="#" class="footer-link">Community forum</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="footer-light__col-head">Road Trip</h4>
+              <ul class="footer-light__links">
+                <li><a href="#" class="footer-link">How it works</a></li>
+                <li><a href="#" class="footer-link">Driver guidelines</a></li>
+                <li><a href="#" class="footer-link">Insurance &amp; safety</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="legal-band">
+          <p class="legal-band__copy">© 2026 Airbnb, Inc. · Concept feature — Road Trip</p>
+          <div class="legal-band__links">
+            <a href="#" class="legal-band__link">Privacy</a>
+            <a href="#" class="legal-band__link">Terms</a>
+            <a href="#" class="legal-band__link">Sitemap</a>
+          </div>
+        </div>
+      </footer>
+
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════════ -->
+    <!--  PAGE: ROUTE PLANNER                                                -->
+    <!-- ════════════════════════════════════════════════════════════════════ -->
+    <section id="page-route-planner" data-page-id="route-planner" aria-label="Route Planner" hidden aria-hidden="true">
+
+      <div class="page-container">
+        <div class="route-planner-layout">
+
+          <!-- Left: Form -->
+          <div class="route-planner-form">
+            <h1 class="route-planner-form__heading">Post your route</h1>
+
+            <div class="text-input-group">
+              <label for="rp-origin">Origin</label>
+              <input type="text" id="rp-origin" class="text-input" placeholder="e.g. San Francisco, CA" autocomplete="off">
+            </div>
+
+            <div class="text-input-group">
+              <label for="rp-destination">Destination</label>
+              <input type="text" id="rp-destination" class="text-input" placeholder="e.g. Los Angeles, CA" autocomplete="off">
+            </div>
+
+            <div class="text-input-group">
+              <label for="rp-seats">Available seats</label>
+              <input type="number" id="rp-seats" class="text-input" placeholder="e.g. 3" min="1" max="8">
+            </div>
+
+            <div class="text-input-group">
+              <label for="rp-vehicle">Vehicle type</label>
+              <input type="text" id="rp-vehicle" class="text-input" placeholder="e.g. Tesla Model Y">
+            </div>
+
+            <!-- Date picker -->
+            <fieldset class="date-picker">
+              <legend>Departure date</legend>
+              <input type="hidden" id="rp-departure">
+              <div class="date-picker-nav">
+                <button type="button" class="date-picker-nav__prev" aria-label="Previous month">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <span class="date-picker-nav__month" id="dp-month-label" aria-live="polite"></span>
+                <button type="button" class="date-picker-nav__next" aria-label="Next month">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="date-picker__weekdays" aria-hidden="true">
+                <span class="date-picker__weekday">Su</span>
+                <span class="date-picker__weekday">Mo</span>
+                <span class="date-picker__weekday">Tu</span>
+                <span class="date-picker__weekday">We</span>
+                <span class="date-picker__weekday">Th</span>
+                <span class="date-picker__weekday">Fr</span>
+                <span class="date-picker__weekday">Sa</span>
+              </div>
+              <div class="date-picker__days" id="dp-days" role="grid" aria-label="Calendar"></div>
+            </fieldset>
+
+            <div class="text-input-group">
+              <label for="rp-notes">Notes for travelers</label>
+              <textarea id="rp-notes" class="text-input" rows="4" placeholder="e.g. I'll stop for lunch in Morro Bay, dog-friendly, quiet music preferred"></textarea>
+            </div>
+
+            <!-- KIT GAP: Route visualization -->
+            <!-- KIT GAP: No map or route-visualization component exists in the Airbnb UI Kit. A 'route-map' kit component showing origin → destination on an interactive map (with Mapbox/Google Maps) would replace this placeholder. -->
+            <div class="kit-gap">
+              <span class="kit-gap__label">KIT GAP — Route visualization</span>
+              <p class="kit-gap__description">No map or route-visualization component in the Airbnb UI Kit. A <code>route-map</code> kit component showing origin → destination on an interactive map would replace this section.</p>
+            </div>
+
+            <!-- KIT GAP: Waypoints -->
+            <!-- KIT GAP: No waypoint or timeline/stop-list component exists in the Airbnb UI Kit. A 'waypoints' or 'itinerary-list' kit component with add/remove/reorder stops is needed here. -->
+            <div class="kit-gap">
+              <span class="kit-gap__label">KIT GAP — Waypoints &amp; stops</span>
+              <p class="kit-gap__description">No waypoint or timeline/stop-list component in the Airbnb UI Kit. A <code>waypoints</code> kit component with add/remove/reorder stops functionality is needed.</p>
+            </div>
+
+            <button type="submit" id="rp-submit" class="button-primary" style="width: 100%;" disabled>Post your route</button>
+          </div>
+
+          <!-- Right: reservation-card (sticky) -->
+          <div class="route-planner-layout__sticky">
+            <div class="reservation-card" aria-live="polite" aria-label="Route summary">
+              <h2 class="reservation-card__title">Your route summary</h2>
+
+              <div class="reservation-card__row">
+                <span class="reservation-card__label">From</span>
+                <span class="reservation-card__value" id="summary-origin">—</span>
+              </div>
+              <div class="reservation-card__row">
+                <span class="reservation-card__label">To</span>
+                <span class="reservation-card__value" id="summary-destination">—</span>
+              </div>
+              <div class="reservation-card__row">
+                <span class="reservation-card__label">Departure</span>
+                <span class="reservation-card__value" id="summary-departure">—</span>
+              </div>
+              <div class="reservation-card__row">
+                <span class="reservation-card__label">Seats offered</span>
+                <span class="reservation-card__value" id="summary-seats">—</span>
+              </div>
+
+              <div class="reservation-card__divider" role="separator"></div>
+
+              <div class="reservation-card__row">
+                <span class="reservation-card__label">Suggested price / seat</span>
+                <span class="reservation-card__value">$25–$45</span>
+              </div>
+              <div class="reservation-card__row" style="border-bottom: none;">
+                <span class="reservation-card__label" style="font: var(--text-caption-sm-font); color: var(--color-muted-soft);">Based on similar routes</span>
+              </div>
+
+              <button type="button" id="rp-submit-rail" class="button-primary reservation-card__cta"
+                      onclick="document.getElementById('rp-submit').click()" disabled>
+                Post your route
+              </button>
+
+              <!-- host-card: Your driver profile -->
+              <div class="host-card" style="margin-top: var(--space-base);">
+                <div class="host-card__header">
+                  <div class="host-card__avatar-placeholder" aria-hidden="true">Y</div>
+                  <div>
+                    <h3 class="host-card__name">Your driver profile</h3>
+                    <div class="host-card__superhost" style="color: var(--color-muted);">Complete your profile to go live</div>
+                  </div>
+                </div>
+                <p class="host-card__meta">Profile photo, vehicle details, and a short bio help travelers feel confident booking with you.</p>
+                <button class="button-secondary" style="width: 100%;">Edit profile</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <div class="footer-light">
+          <div class="footer-light__grid">
+            <div>
+              <h4 class="footer-light__col-head">Support</h4>
+              <ul class="footer-light__links">
+                <li><a href="#" class="footer-link">Help Center</a></li>
+                <li><a href="#" class="footer-link">Safety information</a></li>
+                <li><a href="#" class="footer-link">Cancellation options</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="footer-light__col-head">Hosting</h4>
+              <ul class="footer-light__links">
+                <li><a href="#" class="footer-link">Try hosting</a></li>
+                <li><a href="#" class="footer-link">AirCover for Hosts</a></li>
+                <li><a href="#" class="footer-link">Community forum</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="footer-light__col-head">Road Trip</h4>
+              <ul class="footer-light__links">
+                <li><a href="#" class="footer-link">How it works</a></li>
+                <li><a href="#" class="footer-link">Driver guidelines</a></li>
+                <li><a href="#" class="footer-link">Insurance &amp; safety</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="legal-band">
+          <p class="legal-band__copy">© 2026 Airbnb, Inc. · Concept feature — Road Trip</p>
+          <div class="legal-band__links">
+            <a href="#" class="legal-band__link">Privacy</a>
+            <a href="#" class="legal-band__link">Terms</a>
+            <a href="#" class="legal-band__link">Sitemap</a>
+          </div>
+        </div>
+      </footer>
+
+    </section>
+
+  </main>
+
+  <script src="js/router.js" defer></script>
+</body>
+</html>

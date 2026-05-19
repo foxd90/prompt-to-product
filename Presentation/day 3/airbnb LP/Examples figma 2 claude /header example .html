@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airbnb Road Trip — Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Design tokens ───────────────────────────────── */
+    :root {
+      --color-primary:       #ff385c;
+      --color-primary-active:#d03660;
+      --color-ink:           #222222;
+      --color-muted:         #717171;
+      --color-canvas:        #ffffff;
+      --color-hairline:      #dddddd;
+      --color-border-medium: #d3d3d3;
+      --color-surface-soft:  #f7f7f7;
+      --color-surface-strong:#f2f2f2;
+      --elevation-float: 0px 2px 12px 0px rgba(0,0,0,0.10);
+      --font: 'Inter', -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background: var(--color-canvas);
+      min-height: 100vh;
+      color: var(--color-ink);
+    }
+
+    /* ── Top Nav Bar ─────────────────────────────────── */
+    .top-nav {
+      background: var(--color-canvas);
+      height: 80px;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      width: 100%;
+    }
+
+    .nav-logo {
+      height: 40px;
+      width: 128px;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+
+    /* Inline SVG fallback logo rendered as img alt doesn't show — use inline SVG */
+    .nav-logo-svg {
+      width: 128px;
+      height: 40px;
+      flex-shrink: 0;
+    }
+
+    .nav-spacer { flex: 1; }
+
+    .nav-tabs {
+      display: flex;
+      align-items: stretch;
+      flex-shrink: 0;
+    }
+
+    .tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 12px 20px;
+      cursor: pointer;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.15s;
+    }
+
+    .tab--active {
+      border-bottom-color: var(--color-ink);
+      padding-bottom: 10px;
+    }
+
+    .tab-icon {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .tab-label {
+      font-size: 14px;
+      line-height: 1.43;
+      color: var(--color-ink);
+      white-space: nowrap;
+      font-weight: 400;
+    }
+
+    .tab--active .tab-label { font-weight: 600; }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .nav-host-link {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-ink);
+      white-space: nowrap;
+      text-decoration: none;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 9999px;
+      transition: background 0.15s;
+    }
+    .nav-host-link:hover { background: var(--color-surface-soft); }
+
+    .nav-globe-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      transition: background 0.15s;
+    }
+    .nav-globe-btn:hover { background: var(--color-surface-soft); }
+
+    .nav-menu-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-canvas);
+      border: 1px solid var(--color-border-medium);
+      border-radius: 21px;
+      padding: 6px 6px 6px 12px;
+      cursor: pointer;
+      transition: box-shadow 0.15s;
+    }
+    .nav-menu-btn:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.12); }
+
+    .nav-menu-btn .hamburger {
+      font-size: 14px;
+      color: var(--color-ink);
+      line-height: 1;
+    }
+
+    .nav-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #ccc;
+      flex-shrink: 0;
+    }
+
+    /* ── Search Band ─────────────────────────────────── */
+    .search-band {
+      position: relative;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid #eaeaea;
+      overflow: hidden;
+    }
+
+    .search-band-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .search-band-inner {
+      position: relative;
+      width: 100%;
+      padding: 18px 210px;
+    }
+
+    /* Search pill */
+    .search-pill {
+      background: var(--color-canvas);
+      border: 1px solid #d9d9d9;
+      border-radius: 9999px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      box-shadow: var(--elevation-float);
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .search-segment {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 8px 24px;
+      flex: 1;
+      min-width: 50px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .search-segment:hover { background: var(--color-surface-soft); }
+
+    .segment-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-ink);
+      white-space: nowrap;
+      line-height: 1.25;
+    }
+
+    .segment-value {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--color-muted);
+      white-space: nowrap;
+      line-height: 1.43;
+    }
+
+    .search-divider {
+      width: 1px;
+      height: 32px;
+      background: #cccccc;
+      flex-shrink: 0;
+    }
+
+    .search-segment--seats {
+      flex: 0;
+      min-width: auto;
+    }
+
+    .search-btn-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 8px;
+      flex-shrink: 0;
+    }
+
+    .search-orb {
+      width: 48px;
+      height: 48px;
+      border-radius: 9999px;
+      background: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    .search-orb:hover { background: var(--color-primary-active); }
+
+    .search-orb svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Top Nav Bar ──────────────────────────────────── -->
+  <header class="top-nav">
+
+    <!-- Airbnb logo -->
+    <img
+      class="nav-logo"
+      src="https://www.figma.com/api/mcp/asset/e9e48312-dc5f-467c-a6e1-ebd9d7e89d1d"
+      alt="airbnb"
+      onerror="this.replaceWith(document.getElementById('logo-fallback').content.cloneNode(true))"
+    />
+    <template id="logo-fallback">
+      <svg class="nav-logo-svg" viewBox="0 0 148 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="airbnb">
+        <path d="M32 19.5c0-1.4-.5-2.6-1.4-3.5L20 5.4c-.9-.9-2.1-1.4-3.5-1.4s-2.6.5-3.5 1.4L2.4 16c-.9.9-1.4 2.1-1.4 3.5 0 2.7 2.2 4.9 4.9 4.9.9 0 1.8-.3 2.6-.7l8-8.1 8 8.1c.7.5 1.6.8 2.6.8 2.6-.1 4.9-2.3 4.9-5z" fill="#FF385C"/>
+        <text x="38" y="27" font-family="'Airbnb Cereal VF',Inter,sans-serif" font-size="22" font-weight="600" fill="#FF385C">airbnb</text>
+      </svg>
+    </template>
+
+    <div class="nav-spacer"></div>
+
+    <!-- Nav Tabs -->
+    <nav class="nav-tabs">
+      <a class="tab tab--active" href="#">
+        <img
+          class="tab-icon"
+          src="https://www.figma.com/api/mcp/asset/e2f2f187-c1de-4421-96a7-7af324b29596"
+          alt=""
+          onerror="this.style.display='none'"
+        />
+        <span class="tab-label">Home</span>
+      </a>
+      <a class="tab tab--inactive" href="#">
+        <img
+          class="tab-icon"
+          src="https://www.figma.com/api/mcp/asset/43eb086f-c036-42a5-849b-dcfa3b4fb1f1"
+          alt=""
+          onerror="this.style.display='none'"
+        />
+        <span class="tab-label">Find Stay</span>
+      </a>
+      <a class="tab tab--inactive" href="#">
+        <img
+          class="tab-icon"
+          src="https://www.figma.com/api/mcp/asset/0db4235b-db40-41a8-a261-f0c4a5ba50ee"
+          alt=""
+          onerror="this.style.display='none'"
+        />
+        <span class="tab-label">Route Planner</span>
+      </a>
+    </nav>
+
+    <div class="nav-spacer"></div>
+
+    <!-- Nav Actions -->
+    <div class="nav-actions">
+      <a class="nav-host-link" href="#">Become a Host</a>
+      <button class="nav-globe-btn" aria-label="Language">🌐</button>
+      <button class="nav-menu-btn" aria-label="Account menu">
+        <span class="hamburger">☰</span>
+        <div class="nav-avatar"></div>
+      </button>
+    </div>
+
+  </header>
+
+  <!-- ── Search Band ──────────────────────────────────── -->
+  <section class="search-band">
+    <img
+      class="search-band-bg"
+      src="https://www.figma.com/api/mcp/asset/6ea63301-7970-4fd2-a028-760760e5dec1"
+      alt=""
+    />
+
+    <div class="search-band-inner">
+      <div class="search-pill">
+
+        <div class="search-segment">
+          <span class="segment-label">From</span>
+          <span class="segment-value">City or address</span>
+        </div>
+
+        <div class="search-divider"></div>
+
+        <div class="search-segment">
+          <span class="segment-label">To</span>
+          <span class="segment-value">City or address</span>
+        </div>
+
+        <div class="search-divider"></div>
+
+        <div class="search-segment">
+          <span class="segment-label">When</span>
+          <span class="segment-value">Add dates</span>
+        </div>
+
+        <div class="search-divider"></div>
+
+        <div class="search-segment search-segment--seats">
+          <span class="segment-label">Seats</span>
+          <span class="segment-value">1</span>
+        </div>
+
+        <div class="search-btn-wrap">
+          <button class="search-orb" aria-label="Search">
+            <!-- Magnifying glass icon -->
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="9" cy="9" r="6" stroke="white" stroke-width="2.2"/>
+              <line x1="13.5" y1="13.5" x2="18" y2="18" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
