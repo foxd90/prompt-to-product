@@ -460,6 +460,36 @@ code {
 </section>
 
 <!-- ══════════════════════════════════════════════
+     SLIDE 1a — DAY 2 RECAP
+══════════════════════════════════════════════ -->
+<section class="slide slide--light">
+  <div class="wrap">
+    <div style="display:flex; align-items:baseline; gap:16px;">
+      <div class="t-h1">Day 2 recap</div>
+      <span class="badge badge--purple" style="font-size:13px;">yesterday</span>
+    </div>
+    <div style="display:flex; flex-direction:column; margin-top:40px; border-top: 1px solid var(--hairline);">
+      <div style="display:flex; gap:20px; align-items:baseline; padding:20px 0; border-bottom:1px solid var(--hairline);">
+        <span style="color:var(--purple); font-weight:700; font-size:22px; min-width:24px;">→</span>
+        <span class="t-body">Built a clear mental model: <strong>plugins → connectors → agents → skills</strong> <span style="color:var(--slate);">(skills = reusable workflows + better context control)</span></span>
+      </div>
+      <div style="display:flex; gap:20px; align-items:baseline; padding:20px 0; border-bottom:1px solid var(--hairline);">
+        <span style="color:var(--purple); font-weight:700; font-size:22px; min-width:24px;">→</span>
+        <span class="t-body">Practiced a <strong>brainstorming skill</strong> to structure decisions before execution</span>
+      </div>
+      <div style="display:flex; gap:20px; align-items:baseline; padding:20px 0; border-bottom:1px solid var(--hairline);">
+        <span style="color:var(--purple); font-weight:700; font-size:22px; min-width:24px;">→</span>
+        <span class="t-body">Built an <strong>icon-generator skill</strong> using reference PNGs + Gemini <span style="color:var(--slate);">(via OpenRouter)</span></span>
+      </div>
+      <div style="display:flex; gap:20px; align-items:baseline; padding:20px 0;">
+        <span style="color:var(--purple); font-weight:700; font-size:22px; min-width:24px;">→</span>
+        <span class="t-body">Learned the <strong>iterate + evaluate loop</strong> (LLM + human criteria), plus key hygiene: <strong>watch context/costs, don't ship API keys</strong></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
      SLIDE 2 — CHURCHILL
 ══════════════════════════════════════════════ -->
 <section class="slide slide--light">
@@ -554,6 +584,36 @@ code {
     <div class="div-label">Section 01</div>
     <div class="t-display t-on-dark">Figma Make</div>
     <div class="t-body t-on-dark-muted mt-24">What it is · What it does · Where it breaks</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 5a — WHAT IS FIGMA MAKE
+══════════════════════════════════════════════ -->
+<section class="slide slide--light" style="overflow: hidden;">
+  <div class="wrap wrap--top">
+    <div class="t-h1">What is Figma Make?</div>
+    <div class="g2 mt-40" style="gap: 24px;">
+      <div class="card card--sky">
+        <div class="card-title">🔵 What it is</div>
+        <div class="card-body mt-8">
+          An AI tool inside Figma that turns designs into working,
+          interactive code — automatically.
+        </div>
+      </div>
+      <div class="card card--yellow">
+        <div class="card-title">💡 Analogy</div>
+        <div class="card-body mt-8">
+          You sketch the floor plan. Make assembles the furniture —
+          in real time, while you watch.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 70%;">
+    <img src="Assets%20/figma%20make.png" alt="Figma Make interface"
+         style="width: 100%; display: block; border-radius: 12px 12px 0 0;
+                box-shadow: 0 -4px 32px rgba(0,0,0,0.12);" />
   </div>
 </section>
 
@@ -761,41 +821,49 @@ code {
         <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--purple); margin-bottom:6px;">01</div>
         <div class="card-title" style="font-size:16px;">Shared context block</div>
         <div class="card-body" style="font-size:14px; margin-top:4px;">One framing statement prepended to every prompt — keeps spacing, tokens, and scope consistent without repeating.</div>
+        <div class="bad-prompt" style="font-size:12px; padding:10px 14px; margin-top:10px; line-height:1.5;">Context: Airbnb listing page, 375px, Airbnb DS tokens. No hardcoded values.</div>
       </div>
       <div class="card card--surface" style="padding:20px 24px;">
         <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--purple); margin-bottom:6px;">02</div>
         <div class="card-title" style="font-size:16px;">One prompt per section</div>
         <div class="card-body" style="font-size:14px; margin-top:4px;">Each prompt covers exactly one visual region — errors don't compound and constraints get respected.</div>
+        <div class="bad-prompt" style="font-size:12px; padding:10px 14px; margin-top:10px; line-height:1.5;">Build the hero section only. Full-bleed image, search bar at 60% height.</div>
       </div>
       <div class="card card--surface" style="padding:20px 24px;">
         <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--purple); margin-bottom:6px;">03</div>
         <div class="card-title" style="font-size:16px;">Elements listed, not described</div>
         <div class="card-body" style="font-size:14px; margin-top:4px;">Name every UI item explicitly — headline, subheadline, CTA — not as a feeling or outcome.</div>
+        <div class="bad-prompt" style="font-size:12px; padding:10px 14px; margin-top:10px; line-height:1.5;">Include: headline, subheadline, primary CTA, trust badge row (3 icons + labels).</div>
       </div>
       <div class="card card--surface" style="padding:20px 24px;">
         <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--purple); margin-bottom:6px;">04</div>
         <div class="card-title" style="font-size:16px;">Spatial layout instructions</div>
         <div class="card-body" style="font-size:14px; margin-top:4px;">"Centered", "pinned to the bottom", "side by side", "top half" — remove all structural ambiguity.</div>
+        <div class="bad-prompt" style="font-size:12px; padding:10px 14px; margin-top:10px; line-height:1.5;">Search bar: centered, pinned 60% from top. Full-width pill shape on mobile.</div>
       </div>
       <div class="card card--surface" style="padding:20px 24px;">
         <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--purple); margin-bottom:6px;">05</div>
         <div class="card-title" style="font-size:16px;">Named tokens throughout</div>
         <div class="card-body" style="font-size:14px; margin-top:4px;">Every colour and type decision references a semantic token (<code>-color-bg-brand</code>, <code>heading-large</code>) not a visual description.</div>
+        <div class="bad-prompt" style="font-size:12px; padding:10px 14px; margin-top:10px; line-height:1.5;">bg: -color-bg-primary&nbsp;&nbsp;button: -color-action-primary&nbsp;&nbsp;label: body-small</div>
       </div>
       <div class="card card--surface" style="padding:20px 24px;">
         <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--purple); margin-bottom:6px;">06</div>
         <div class="card-title" style="font-size:16px;">"Do not" rules in every section</div>
         <div class="card-body" style="font-size:14px; margin-top:4px;">Each prompt closes with constraints — no shadows, no invented elements, no hardcoded values.</div>
+        <div class="bad-prompt" style="font-size:12px; padding:10px 14px; margin-top:10px; line-height:1.5;">Do not add shadows, gradients, or any element not listed above.</div>
       </div>
       <div class="card card--surface" style="padding:20px 24px;">
         <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--purple); margin-bottom:6px;">07</div>
         <div class="card-title" style="font-size:16px;">Progressive and reviewable</div>
         <div class="card-body" style="font-size:14px; margin-top:4px;">The sequence is ordered and numbered — check each section before building the next.</div>
+        <div class="bad-prompt" style="font-size:12px; padding:10px 14px; margin-top:10px; line-height:1.5;">Step 1 of 4: hero only. Confirm before moving to the search results grid.</div>
       </div>
       <div class="card card--surface" style="padding:20px 24px;">
         <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--purple); margin-bottom:6px;">08</div>
         <div class="card-title" style="font-size:16px;">Provide visuals</div>
         <div class="card-body" style="font-size:14px; margin-top:4px;">A Figma design or inspiration screenshot helps the LLM build exactly what you want.</div>
+        <div class="bad-prompt" style="font-size:12px; padding:10px 14px; margin-top:10px; line-height:1.5;">[screenshot attached] Match this layout — DS tokens throughout, no overrides.</div>
       </div>
     </div>
   </div>
@@ -936,8 +1004,7 @@ code {
         <div class="cl-section">
           <div class="cl-head"><span class="cl-num">1</span>Rewrite the prompt</div>
           <div class="cl-item">Download the "figma make prompt guide" skill from the Skool link</div>
-          <div class="cl-item">Drag it into terminal → type <code>install this skill</code></div>
-          <div class="cl-item">Restart Claude <code>control C x2 </code> </div> 
+          <div class="cl-item">Double tap to open the skill — it will open in Claude Code → add to library</div>
           <div class="cl-item">Type <code>/figma-make-prompt-guide</code> press "tab" then your prompt</div>
           <div class="cl-item">Type your idea — skill guides you through improving it</div>
         </div>
