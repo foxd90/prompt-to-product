@@ -769,36 +769,75 @@ code {
 ══════════════════════════════════════════════ -->
 <section class="slide slide--light">
   <div class="strip-top">Your turn · 15 min</div>
-  <div class="wrap wrap--top">
-    <div class="t-h2" style="margin-bottom:24px;">Your turn</div>
-    <div>
-      <div class="hstep">
-        <div class="hstep-head"><span class="hstep-n">1</span>Add the Remotion skill from the Skool link</div>
-      </div>
-      <div class="hstep">
-        <div class="hstep-head"><span class="hstep-n">2</span>Create a folder and open it in Claude Code</div>
-      </div>
-      <div class="hstep">
-        <div class="hstep-head"><span class="hstep-n">3</span>Run <code>/remotion-starter</code></div>
-      </div>
-      <div class="hstep">
-        <div class="hstep-head"><span class="hstep-n">4</span>Prompt your video — pick one:</div>
-        <div class="hstep-options">
-          <div class="hstep-opt">3 animated slides on "how to learn a handstand"</div>
-          <div class="hstep-opt">An animated pie chart from data you provide</div>
-          <div class="hstep-opt">Something from the Remotion gallery (avoid heavy scenes)</div>
+  <div class="wrap wrap--top" style="padding: 40px 72px 24px;">
+    <div style="display:flex; gap:48px; align-items:flex-start; flex:1; min-height:0;">
+
+      <!-- LEFT: Your turn -->
+      <div style="flex:1; min-width:0;">
+        <div class="t-h2" style="margin-bottom:14px;">Your turn</div>
+        <div>
+          <div class="hstep">
+            <div class="hstep-head"><span class="hstep-n">1</span>Add the Remotion skill from the Skool link</div>
+          </div>
+          <div class="hstep">
+            <div class="hstep-head"><span class="hstep-n">2</span>Create a folder and open it in Claude Code</div>
+          </div>
+          <div class="hstep">
+            <div class="hstep-head"><span class="hstep-n">3</span>Get the Remotion skills:</div>
+            <div class="hstep-body"><code>npx skills add https://github.com/remotion-dev/skills --skill remotion-best-practices</code></div>
+          </div>
+          <div class="hstep">
+            <div class="hstep-head"><span class="hstep-n">4</span>Run <code>/remotion-starter</code></div>
+          </div>
+          <div class="hstep">
+            <div class="hstep-head"><span class="hstep-n">5</span>Prompt your video — pick one:</div>
+            <div class="hstep-options">
+              <div class="hstep-opt">3 animated slides on "how to learn a handstand"</div>
+              <div class="hstep-opt">An animated pie chart from data you provide</div>
+              <div class="hstep-opt">Something from the Remotion gallery (avoid heavy scenes)</div>
+            </div>
+          </div>
+          <div class="hstep">
+            <div class="hstep-head"><span class="hstep-n">6</span>Add a voiceover — Apple TTS or ElevenLabs</div>
+          </div>
+          <div class="hstep">
+            <div class="hstep-head"><span class="hstep-n">7</span>Post your render or screen recording in chat</div>
+          </div>
+          <div class="done-block">
+            <div class="done-line">✅ Done when: You've posted a 10–15s rendered video or preview recording in chat.</div>
+            <div class="stuck-line">If stuck: [backup link placeholder]</div>
+          </div>
         </div>
       </div>
-      <div class="hstep">
-        <div class="hstep-head"><span class="hstep-n">5</span>Add a voiceover — Apple TTS or ElevenLabs</div>
+
+      <!-- COLUMN DIVIDER -->
+      <div style="width:1px; background:var(--hairline); align-self:stretch; flex-shrink:0;"></div>
+
+      <!-- RIGHT: Create product demo -->
+      <div style="flex:1; min-width:0;">
+        <div class="t-h2" style="margin-bottom:14px;">Create product demo</div>
+        <div>
+          <div class="hstep">
+            <div class="hstep-head"><span class="hstep-n">1</span>Find a landing page of a product you want to create a demo for</div>
+          </div>
+          <div class="hstep">
+            <div class="hstep-head"><span class="hstep-n">2</span>Copy the URL</div>
+          </div>
+          <div class="hstep">
+            <div class="hstep-head"><span class="hstep-n">3</span>Paste the URL with a prompt:</div>
+            <div class="hstep-body">"Please create a brief product demo for the specific website. When you created, try using the same fonts, the same logo, and the same picture that you find within the page. So feel free to take screenshot and adapt as you prefer."</div>
+          </div>
+          <div class="hstep">
+            <div class="hstep-head"><span class="hstep-n">4</span>Take any brand from the power-design skill, drag the folder into the chat and prompt:</div>
+            <div class="hstep-body">"Theme the entire video in the [your brand] theme — do not use hard coded values, only use the themes found in the design system."</div>
+          </div>
+          <div class="hstep">
+            <div class="hstep-head"><span class="hstep-n">5</span>Add voiceover and music with the OpenRouter API. Prompt:</div>
+            <div class="hstep-body">"Create a script, create voice over and add music to the video." <em style="color:var(--steel);">(it will ask for your OpenRouter API key)</em></div>
+          </div>
+        </div>
       </div>
-      <div class="hstep">
-        <div class="hstep-head"><span class="hstep-n">6</span>Post your render or screen recording in chat</div>
-      </div>
-      <div class="done-block">
-        <div class="done-line">✅ Done when: You've posted a 10–15s rendered video or preview recording in chat.</div>
-        <div class="stuck-line">If stuck: [backup link placeholder]</div>
-      </div>
+
     </div>
   </div>
 </section>
